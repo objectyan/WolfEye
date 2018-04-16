@@ -13,7 +13,7 @@
 
 @implementation OpenCVImage
 
--(void)setImage:(UIImageView *) img{
+-(void)imageByCVMat:(UIImageView *) img{
     int threshold_value = 0;
     int threshold_type = 3;
     int const max_value = 255;

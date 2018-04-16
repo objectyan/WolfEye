@@ -15,6 +15,6 @@
 
 + (void) imageByCVMat:(UIImageView *) img {
     OpenCVImage *a = [[OpenCVImage alloc] init];
-    [a setImage:img];
+    [a imageByCVMat:img];
 }
 @end

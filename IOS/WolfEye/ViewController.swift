@@ -19,9 +19,7 @@ class ViewController: UIViewController {
                                             height: self.view.frame.height))
         img.image = UIImage(named: "launch");
         self.view.addSubview(img)
-        
-        OpenCVWapper.imageByCVMat(img)
-        
+        OpenCVWapper.image(byCVMat: img)
     }
     
     override func didReceiveMemoryWarning() {

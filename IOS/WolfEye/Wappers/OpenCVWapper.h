@@ -13,5 +13,5 @@
 
 @interface OpenCVWapper : NSObject
 +(NSString *) openCVVersion;
-+(void)imageByCVMat:(UIImageView *) img;
++(void) imageByCVMat:(UIImageView *) img;
 @end

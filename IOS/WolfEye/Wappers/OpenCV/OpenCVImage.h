@@ -10,5 +10,5 @@
 #import <UIKit/UIKit.h>
 
 @interface OpenCVImage : NSObject
--(void)setImage:(UIImageView *) img;
+-(void)imageByCVMat:(UIImageView *) img;
 @end
