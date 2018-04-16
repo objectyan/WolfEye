@@ -10,8 +10,10 @@
 		05A9525C20843BDD00067541 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A9525B20843BDD00067541 /* AppDelegate.swift */; };
 		05A9525E20843BDD00067541 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A9525D20843BDD00067541 /* ViewController.swift */; };
 		05A9526120843BDD00067541 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05A9525F20843BDD00067541 /* Main.storyboard */; };
-		05A9526320843BDE00067541 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05A9526220843BDE00067541 /* Assets.xcassets */; };
 		05A9526620843BDE00067541 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05A9526420843BDE00067541 /* LaunchScreen.storyboard */; };
+		05A9526E208446C100067541 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05A9526D208446C100067541 /* Info.plist */; };
+		05A9528C20847D3900067541 /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A9528B20847D3900067541 /* launch.png */; };
+		05A9528E2084804A00067541 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05A9528D2084804900067541 /* Assets.xcassets */; };
 		251141A0A97FA05142AD95DA /* Pods_WolfEye.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2B28BBB4C311EAAEDFDD0D /* Pods_WolfEye.framework */; };
 /* End PBXBuildFile section */
 
@@ -20,9 +22,10 @@
 		05A9525B20843BDD00067541 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05A9525D20843BDD00067541 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		05A9526020843BDD00067541 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		05A9526220843BDE00067541 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05A9526520843BDE00067541 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		05A9526720843BDE00067541 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05A9526D208446C100067541 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05A9528B20847D3900067541 /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = launch.png; path = ../Resources/launch.png; sourceTree = "<group>"; };
+		05A9528D2084804900067541 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F2B28BBB4C311EAAEDFDD0D /* Pods_WolfEye.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WolfEye.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		704A1C081D5F31B974DABA94 /* Pods-WolfEye.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WolfEye.release.xcconfig"; path = "Pods/Target Support Files/Pods-WolfEye/Pods-WolfEye.release.xcconfig"; sourceTree = "<group>"; };
 		7770DD45C28A89A1183C4A60 /* Pods-WolfEye.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WolfEye.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WolfEye/Pods-WolfEye.debug.xcconfig"; sourceTree = "<group>"; };
@@ -43,6 +46,7 @@
 		05A9524F20843BDD00067541 = {
 			isa = PBXGroup;
 			children = (
+				05A9528820847D1200067541 /* Resources */,
 				05A9525A20843BDD00067541 /* WolfEye */,
 				05A9525920843BDD00067541 /* Products */,
 				126EE3B03F1006C8291D3AE1 /* Pods */,
@@ -61,14 +65,22 @@
 		05A9525A20843BDD00067541 /* WolfEye */ = {
 			isa = PBXGroup;
 			children = (
+				05A9528D2084804900067541 /* Assets.xcassets */,
+				05A9526D208446C100067541 /* Info.plist */,
 				05A9525B20843BDD00067541 /* AppDelegate.swift */,
 				05A9525D20843BDD00067541 /* ViewController.swift */,
 				05A9525F20843BDD00067541 /* Main.storyboard */,
-				05A9526220843BDE00067541 /* Assets.xcassets */,
 				05A9526420843BDE00067541 /* LaunchScreen.storyboard */,
-				05A9526720843BDE00067541 /* Info.plist */,
 			);
 			path = WolfEye;
+			sourceTree = "<group>";
+		};
+		05A9528820847D1200067541 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				05A9528B20847D3900067541 /* launch.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		126EE3B03F1006C8291D3AE1 /* Pods */ = {
@@ -147,9 +159,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05A9526E208446C100067541 /* Info.plist in Resources */,
+				05A9528C20847D3900067541 /* launch.png in Resources */,
 				05A9526620843BDE00067541 /* LaunchScreen.storyboard in Resources */,
-				05A9526320843BDE00067541 /* Assets.xcassets in Resources */,
 				05A9526120843BDD00067541 /* Main.storyboard in Resources */,
+				05A9528E2084804A00067541 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
