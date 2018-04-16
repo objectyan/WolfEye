@@ -15,6 +15,8 @@
 		05A9528C20847D3900067541 /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A9528B20847D3900067541 /* launch.png */; };
 		05A9528E2084804A00067541 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05A9528D2084804900067541 /* Assets.xcassets */; };
 		05A9529420848EB100067541 /* OpenCVWapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 05A9529320848EB100067541 /* OpenCVWapper.mm */; };
+		05B98ACA20849DEA00EB1D1B /* OpenCVVideo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 05B98AC920849DEA00EB1D1B /* OpenCVVideo.mm */; };
+		05B98ACD20849E3600EB1D1B /* OpenCVImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 05B98ACC20849E3600EB1D1B /* OpenCVImage.mm */; };
 		251141A0A97FA05142AD95DA /* Pods_WolfEye.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2B28BBB4C311EAAEDFDD0D /* Pods_WolfEye.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +33,10 @@
 		05A9529220848EB100067541 /* OpenCVWapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVWapper.h; sourceTree = "<group>"; };
 		05A9529320848EB100067541 /* OpenCVWapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWapper.mm; sourceTree = "<group>"; };
 		05A9529520848F1800067541 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		05B98AC820849DEA00EB1D1B /* OpenCVVideo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVVideo.h; sourceTree = "<group>"; };
+		05B98AC920849DEA00EB1D1B /* OpenCVVideo.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVVideo.mm; sourceTree = "<group>"; };
+		05B98ACB20849E3600EB1D1B /* OpenCVImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVImage.h; sourceTree = "<group>"; };
+		05B98ACC20849E3600EB1D1B /* OpenCVImage.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVImage.mm; sourceTree = "<group>"; };
 		0F2B28BBB4C311EAAEDFDD0D /* Pods_WolfEye.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WolfEye.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		704A1C081D5F31B974DABA94 /* Pods-WolfEye.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WolfEye.release.xcconfig"; path = "Pods/Target Support Files/Pods-WolfEye/Pods-WolfEye.release.xcconfig"; sourceTree = "<group>"; };
 		7770DD45C28A89A1183C4A60 /* Pods-WolfEye.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WolfEye.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WolfEye/Pods-WolfEye.debug.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +99,7 @@
 		05A9529020848E8600067541 /* Wappers */ = {
 			isa = PBXGroup;
 			children = (
+				05B98AC720849DC200EB1D1B /* OpenCV */,
 				05A9529220848EB100067541 /* OpenCVWapper.h */,
 				05A9529320848EB100067541 /* OpenCVWapper.mm */,
 			);
@@ -106,6 +113,17 @@
 				05A9529520848F1800067541 /* PrefixHeader.pch */,
 			);
 			path = Headers;
+			sourceTree = "<group>";
+		};
+		05B98AC720849DC200EB1D1B /* OpenCV */ = {
+			isa = PBXGroup;
+			children = (
+				05B98AC820849DEA00EB1D1B /* OpenCVVideo.h */,
+				05B98AC920849DEA00EB1D1B /* OpenCVVideo.mm */,
+				05B98ACB20849E3600EB1D1B /* OpenCVImage.h */,
+				05B98ACC20849E3600EB1D1B /* OpenCVImage.mm */,
+			);
+			path = OpenCV;
 			sourceTree = "<group>";
 		};
 		126EE3B03F1006C8291D3AE1 /* Pods */ = {
@@ -222,8 +240,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				05A9525E20843BDD00067541 /* ViewController.swift in Sources */,
+				05B98ACA20849DEA00EB1D1B /* OpenCVVideo.mm in Sources */,
 				05A9529420848EB100067541 /* OpenCVWapper.mm in Sources */,
 				05A9525C20843BDD00067541 /* AppDelegate.swift in Sources */,
+				05B98ACD20849E3600EB1D1B /* OpenCVImage.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 //
-//  OpenCVWapper.h
+//  OpenCVImage.h
 //  WolfEye
 //
 //  Created by Object Yan on 2018/4/16.
@@ -8,10 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "OpenCVImage.h"
-#import "OpenCVVideo.h"
 
-@interface OpenCVWapper : NSObject
-+(NSString *) openCVVersion;
-+(void)imageByCVMat:(UIImageView *) img;
+@interface OpenCVImage : NSObject
+-(void)setImage:(UIImageView *) img;
 @end

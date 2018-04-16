@@ -12,4 +12,9 @@
 + (NSString *) openCVVersion{
     return [NSString stringWithFormat:@"%s",CV_VERSION];
 }
+
++ (void) imageByCVMat:(UIImageView *) img {
+    OpenCVImage *a = [[OpenCVImage alloc] init];
+    [a setImage:img];
+}
 @end
