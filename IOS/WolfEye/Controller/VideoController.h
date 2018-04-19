@@ -12,8 +12,12 @@
 @interface VideoController : UIViewController<CvVideoCameraDelegate>
 {
     CvVideoCamera* videoCamera;
+    NSMutableArray* imageArr;
 }
 @property (nonatomic, strong) CvVideoCamera* videoCamera;
-@property (nonatomic, strong) IBOutlet UIImageView* imageView;
+@property (nonatomic, strong) NSMutableArray *imageArr;
+@property (nonatomic, strong) NSDictionary *options;
 
+
+@property (nonatomic, strong) IBOutlet UIImageView* imageView;
 @end

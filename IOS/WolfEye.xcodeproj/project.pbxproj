@@ -18,6 +18,8 @@
 		0511A52620859B6600299395 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0511A52520859B6600299395 /* UIKit.framework */; };
 		0511A52820859B6F00299395 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0511A52720859B6F00299395 /* Foundation.framework */; };
 		0511A5322085B69A00299395 /* VideoController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0511A5312085B69A00299395 /* VideoController.mm */; };
+		053A164620871429006937ED /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 053A164520871429006937ED /* Photos.framework */; };
+		053A1648208729AF006937ED /* VideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053A1647208729AF006937ED /* VideoController.swift */; };
 		054D5F402084D6BA00E35D9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 054D5F3F2084D6BA00E35D9F /* Assets.xcassets */; };
 		05A9525C20843BDD00067541 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A9525B20843BDD00067541 /* AppDelegate.swift */; };
 		05A9525E20843BDD00067541 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A9525D20843BDD00067541 /* ViewController.swift */; };
@@ -41,6 +43,8 @@
 		0511A52720859B6F00299395 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0511A5312085B69A00299395 /* VideoController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = VideoController.mm; sourceTree = "<group>"; };
 		0511A5332085B6C700299395 /* VideoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoController.h; sourceTree = "<group>"; };
+		053A164520871429006937ED /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		053A1647208729AF006937ED /* VideoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoController.swift; sourceTree = "<group>"; };
 		054D5F3F2084D6BA00E35D9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05A9525820843BDD00067541 /* WolfEye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WolfEye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05A9525B20843BDD00067541 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				053A164620871429006937ED /* Photos.framework in Frameworks */,
 				0511A52820859B6F00299395 /* Foundation.framework in Frameworks */,
 				0511A52620859B6600299395 /* UIKit.framework in Frameworks */,
 				0511A52420859B5F00299395 /* QuartzCore.framework in Frameworks */,
@@ -83,6 +88,7 @@
 			children = (
 				0511A5312085B69A00299395 /* VideoController.mm */,
 				0511A5332085B6C700299395 /* VideoController.h */,
+				053A1647208729AF006937ED /* VideoController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -150,6 +156,7 @@
 		CD57395B3BAEB4879A51D91D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				053A164520871429006937ED /* Photos.framework */,
 				0511A52720859B6F00299395 /* Foundation.framework */,
 				0511A52520859B6600299395 /* UIKit.framework */,
 				0511A52320859B5F00299395 /* QuartzCore.framework */,
@@ -264,6 +271,7 @@
 				05A9525E20843BDD00067541 /* ViewController.swift in Sources */,
 				0511A5322085B69A00299395 /* VideoController.mm in Sources */,
 				05A9525C20843BDD00067541 /* AppDelegate.swift in Sources */,
+				053A1648208729AF006937ED /* VideoController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +420,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 24G7DR366M;
+				ENABLE_BITCODE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/WolfEye/Headers/PrefixHeader.pch";
 				INFOPLIST_FILE = WolfEye/Info.plist;
@@ -440,6 +449,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 24G7DR366M;
+				ENABLE_BITCODE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/WolfEye/Headers/PrefixHeader.pch";
 				INFOPLIST_FILE = WolfEye/Info.plist;
