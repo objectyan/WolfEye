@@ -54,5 +54,7 @@
 	<string>Use Photo Library</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Use Micro</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Use Photo Library</string>
 </dict>
 </plist>

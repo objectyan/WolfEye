@@ -18,10 +18,35 @@ using namespace cv;
 
 @synthesize imageView;
 @synthesize videoCamera;
-@synthesize imageArr;
+
+- (void)handleDeviceOrientationChange:(NSNotification *)notification{
+    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+    switch (deviceOrientation) {
+        case UIDeviceOrientationLandscapeLeft:
+            self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationLandscapeRight;
+            break;
+        case UIDeviceOrientationLandscapeRight:
+            self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationLandscapeLeft;
+            break;
+        case UIDeviceOrientationPortraitUpsideDown:
+            self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortraitUpsideDown;
+            break;
+        default:
+            self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
+            break;
+    }
+}
 
 - (void) viewDidLoad{
     [super viewDidLoad];
+    
+    if (![UIDevice currentDevice].generatesDeviceOrientationNotifications) {
+        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    }
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleDeviceOrientationChange:)
+                                                name:UIDeviceOrientationDidChangeNotification object:nil];
+    
+    imageNum = 0;
     // Do any additional setup after loading the view, typically from a nib.
     videoCamera = [[CvVideoCamera alloc] init];
     videoCamera.delegate = self;
@@ -41,19 +66,17 @@ using namespace cv;
     if([session canAddInput:autoDevice]){
         [session addInput: autoDevice];
     }
-    videoCamera.rotateVideo = YES;
+    
+    //self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationLandscapeRight;
+    //videoCamera.rotateVideo = YES;
     videoCamera.defaultFPS = 30;
     videoCamera.grayscaleMode = NO;
     [videoCamera start];
-    NSTimer* timer = [NSTimer timerWithTimeInterval:60 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
 }
 
-- (void)timerAction{
-    NSMutableArray* cloneArrImage = (NSMutableArray*)CFBridgingRelease(CFPropertyListCreateDeepCopy(kCFAllocatorDefault,
-                                                                                                    (CFPropertyListRef)self->imageArr, kCFPropertyListMutableContainers));
-    [self->imageArr removeAllObjects];
-    [self imageArraryToVideo:cloneArrImage];
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+    [[UIDevice currentDevice]endGeneratingDeviceOrientationNotifications];
 }
 
 - (void)processImage:(cv::Mat &)image {
@@ -68,7 +91,7 @@ using namespace cv;
     NSString *currentTimeString = [formatter stringFromDate:[NSDate date]];
     putText(image, [currentTimeString UTF8String], CvPoint(0, int(image.rows-image.cols/image.rows * 3)),
             CV_FONT_HERSHEY_SCRIPT_COMPLEX,image.cols/image.rows, cvScalar(200, 200, 200, 0));
-    [imageArr addObject:[self uIImageFromCVMat:image]];
+    //UIImageWriteToSavedPhotosAlbum([self uIImageFromCVMat:image],self,nil,nil);
 }
 
 - (UIImage *)uIImageFromCVMat:(cv::Mat)cvMat
@@ -98,112 +121,6 @@ using namespace cv;
     CGDataProviderRelease(provider);
     CGColorSpaceRelease(colorSpace);
     return finalImage;
-}
-
-- (void) imageArraryToVideo:(NSMutableArray*)imageArr{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"YYYY-MM-dd-HH-mm"];
-    NSString* moviePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/WolfEye/"] stringByAppendingPathComponent:[NSString stringWithFormat:@"WolfEye-Video-%@",[formatter stringFromDate:[NSDate date]]]];
-    NSError *error = nil;
-    AVAssetWriter *videoWriter = [[AVAssetWriter alloc] initWithURL:[NSURL fileURLWithPath:moviePath]
-                                                           fileType:AVFileTypeQuickTimeMovie
-                                                              error:&error];
-    NSParameterAssert(videoWriter);
-    if(error)
-        NSLog(@"error = %@", [error localizedDescription]);
-    NSDictionary *videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:AVVideoCodecH264, AVVideoCodecKey,
-                                   [NSNumber numberWithInt:videoCamera.imageWidth], AVVideoWidthKey,
-                                   [NSNumber numberWithInt:videoCamera.imageHeight], AVVideoHeightKey, nil];
-    AVAssetWriterInput *writerInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:videoSettings];
-    NSDictionary *sourcePixelBufferAttributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:kCVPixelFormatType_32ARGB], kCVPixelBufferPixelFormatTypeKey, nil];
-    AVAssetWriterInputPixelBufferAdaptor *adaptor = [AVAssetWriterInputPixelBufferAdaptor
-                                                     assetWriterInputPixelBufferAdaptorWithAssetWriterInput:writerInput sourcePixelBufferAttributes:sourcePixelBufferAttributesDictionary];
-    NSParameterAssert(writerInput);
-    NSParameterAssert([videoWriter canAddInput:writerInput]);
-    if ([videoWriter canAddInput:writerInput])
-        NSLog(@"start");
-    [videoWriter addInput:writerInput];
-    [videoWriter startWriting];
-    [videoWriter startSessionAtSourceTime:kCMTimeZero];
-    dispatch_queue_t dispatchQueue = dispatch_queue_create("record", NULL);
-    int __block frame = 0;
-    [writerInput requestMediaDataWhenReadyOnQueue:dispatchQueue usingBlock:^{
-        CVPixelBufferRef buffer = NULL;
-        while ([writerInput isReadyForMoreMediaData])
-        {
-            if([imageArr count] == 0)
-            {
-                [writerInput markAsFinished];
-                [videoWriter finishWritingWithCompletionHandler:^{
-                    UISaveVideoAtPathToSavedPhotosAlbum (moviePath,nil,nil, nil);
-                }];
-                if (buffer)
-                {
-                    CFRelease(buffer);
-                    buffer = NULL;
-                }
-                break;
-            }
-            else
-            {
-                if (buffer==NULL)
-                {
-                    buffer = [self imageToCVPixelBufferRef:[[imageArr objectAtIndex:0] CGImage]];
-                }
-                if (buffer)
-                {
-                    CFAbsoluteTime interval = (30 - [imageArr count]) * 50.0;
-                    CMTime currentSampleTime = CMTimeMake((int)interval, 1000);
-                    if([adaptor appendPixelBuffer:buffer withPresentationTime:currentSampleTime])
-                    {
-                        ++frame;
-                        [imageArr removeObjectAtIndex:0];
-                        CFRelease(buffer);
-                        buffer = NULL;
-                    }
-                }
-            }
-        }
-    }];
-}
-
-- (CVPixelBufferRef) imageToCVPixelBufferRef:(CGImageRef)image{
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithBool:YES], kCVPixelBufferCGImageCompatibilityKey,
-                             [NSNumber numberWithBool:YES], kCVPixelBufferCGBitmapContextCompatibilityKey,
-                             nil];
-    CVPixelBufferRef pxbuffer = NULL;
-    CGFloat frameWidth = CGImageGetWidth(image);
-    CGFloat frameHeight = CGImageGetHeight(image);
-    CVReturn status = CVPixelBufferCreate(kCFAllocatorDefault,
-                                          frameWidth,
-                                          frameHeight,
-                                          kCVPixelFormatType_32ARGB,
-                                          (__bridge CFDictionaryRef) options,
-                                          &pxbuffer);
-    NSParameterAssert(status == kCVReturnSuccess && pxbuffer != NULL);
-    CVPixelBufferLockBaseAddress(pxbuffer, 0);
-    void *pxdata = CVPixelBufferGetBaseAddress(pxbuffer);
-    NSParameterAssert(pxdata != NULL);
-    CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef context = CGBitmapContextCreate(pxdata,
-                                                 frameWidth,
-                                                 frameHeight,
-                                                 8,
-                                                 CVPixelBufferGetBytesPerRow(pxbuffer),
-                                                 rgbColorSpace,
-                                                 (CGBitmapInfo)kCGImageAlphaNoneSkipFirst);
-    NSParameterAssert(context);
-    CGContextConcatCTM(context, CGAffineTransformIdentity);
-    CGContextDrawImage(context, CGRectMake(0,
-                                           0,
-                                           frameWidth,
-                                           frameHeight),
-                       image);
-    CGColorSpaceRelease(rgbColorSpace);
-    CGContextRelease(context);
-    CVPixelBufferUnlockBaseAddress(pxbuffer, 0);
-    return pxbuffer;
 }
 
 @end
